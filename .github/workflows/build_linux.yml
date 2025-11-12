@@ -1,0 +1,31 @@
+name: Linux Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download package
+        run: |
+          wget -O archive.tar.zst https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-brotli-1.2.0-1-any.pkg.tar.zst
+          
+      - name: Install dependencies and unzip file
+        run: |
+          sudo apt-get install zstd
+          tar --zstd -xvf archive.tar.zst
+          
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows-artifact
+          path: ${{github.workspace}}
+          if-no-files-found: ignore
+          retention-days: 0
