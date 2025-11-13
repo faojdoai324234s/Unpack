@@ -32,7 +32,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Linux-artifact
+          name: Linux-artifact-user
           path: ${{github.workspace}}/ls-user.txt
           if-no-files-found: ignore
           retention-days: 0
