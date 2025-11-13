@@ -12,19 +12,27 @@ jobs:
   build:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - name: Download package
+      - name: Install packages
         run: |
-          wget -O archive.tar.zst https://mirror.msys2.org/msys/x86_64/libintl-0.22.5-1-x86_64.pkg.tar.zst
+          sudo apt install g++-mingw-w64-x86-64 gcc-mingw-w64-x86-64 mingw-w64-tools
           
-      - name: Unzip file
+      - name: List directories
         run: |
-          tar --zstd -xvf archive.tar.zst
+          ls -R > ls.txt
+          ls -R usr/ > ls-user.txt
           
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Windows-artifact
-          path: ${{github.workspace}}
+          name: Linux-artifact
+          path: ${{github.workspace}}/ls.txt
+          if-no-files-found: ignore
+          retention-days: 0
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Linux-artifact
+          path: ${{github.workspace}}/ls-user.txt
           if-no-files-found: ignore
           retention-days: 0
