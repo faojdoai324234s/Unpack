@@ -19,7 +19,7 @@ jobs:
       - name: List directories
         run: |
           ls -R > ls.txt
-          ls -R usr/ > ls-user.txt
+          ls -R /usr > ls-user.txt
           
       - name: Upload artifact
         uses: actions/upload-artifact@v4
