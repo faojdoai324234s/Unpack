@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Download package
         run: |
-          wget -O archive.tar.zst https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-libiconv-1.18-1-any.pkg.tar.zst
+          wget -O archive.tar.zst https://mirror.msys2.org/mingw/mingw64/mingw-w64-x86_64-pcre2-10.47-1-any.pkg.tar.zst
           
       - name: Unzip file
         run: |
